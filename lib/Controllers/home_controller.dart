@@ -2,7 +2,6 @@ import 'package:apna_news/Models/category_model.dart';
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Repositories/home_repository.dart';
 import 'package:apna_news/Utils/common_functions.dart';
-import 'package:apna_news/Utils/images.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:get/get.dart';
 
@@ -22,16 +21,6 @@ class HomeController extends GetxController {
         .then((value) => Get.toNamed(RouteNames.homeScreen));
     super.onInit();
   }
-
-  List<CategoryModel> categoryList = [
-    CategoryModel(catName: "General", catImage: Images.general),
-    CategoryModel(catName: "Business", catImage: Images.business),
-    CategoryModel(catName: "Entertainment", catImage: Images.entertainment),
-    CategoryModel(catName: "Health", catImage: Images.health),
-    CategoryModel(catName: "Science", catImage: Images.science),
-    CategoryModel(catName: "Sports", catImage: Images.sports),
-    CategoryModel(catName: "Technology", catImage: Images.technology),
-  ];
 
   // late Rx<int?> selectedIndex = Rx<int?>(null);
   RxInt selectedIndex = 0.obs;

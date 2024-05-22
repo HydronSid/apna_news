@@ -1,6 +1,7 @@
 import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,13 +47,16 @@ class HorizontalListCategory extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(
-                        "view all",
-                        style: GoogleFonts.poppins(
-                          letterSpacing: 0.7,
-                          decoration: TextDecoration.underline,
-                          color: txtColor,
-                          fontWeight: FontWeight.normal,
+                      InkWell(
+                        onTap: () => Get.toNamed(RouteNames.viewAllHeadLines),
+                        child: Text(
+                          "view all",
+                          style: GoogleFonts.poppins(
+                            letterSpacing: 0.7,
+                            decoration: TextDecoration.underline,
+                            color: txtColor,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ],

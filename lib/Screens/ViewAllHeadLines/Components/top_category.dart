@@ -1,4 +1,4 @@
-import 'package:apna_news/Controllers/home_controller.dart';
+import 'package:apna_news/Controllers/view_top_headlines_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/appconstants.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +6,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HorizontalCategory extends StatelessWidget {
-  const HorizontalCategory({
+class HeadLineHorizontalCategory extends StatelessWidget {
+  const HeadLineHorizontalCategory({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    HomeController controller = Get.find();
+    ViewTopHeadlinesController controller = Get.find();
     return SizedBox(
       height: 60,
       child: Container(
