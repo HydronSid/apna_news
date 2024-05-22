@@ -14,4 +14,8 @@ class HomeController extends GetxController {
   ];
 
   RxInt selectedIndex = 0.obs;
+
+  changeSelectedIndex(int index) {
+    selectedIndex.value = index;
+  }
 }

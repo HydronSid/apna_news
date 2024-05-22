@@ -34,7 +34,7 @@ class HomeCustomAppBar extends StatelessWidget {
                       //  onTap: () => CommonFunctions().checkIfLogin("Cart"),
                       child: Icon(
                     Icons.settings,
-                    color: accentColor,
+                    color: txtColor,
                     size: 28,
                   )),
                 ],
