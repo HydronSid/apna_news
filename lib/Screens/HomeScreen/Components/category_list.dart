@@ -23,20 +23,23 @@ class HorizontalCategory extends StatelessWidget {
             itemBuilder: (context, index) {
               var data = controller.categoryList[index];
               return InkWell(
-                  onTap: () => controller.changeSelectedIndex(index),
+                  onTap: () => controller.changeSelectedIndex(index, data),
                   child: Obx(
                     () => Card(
                       elevation: 3,
                       margin: const EdgeInsets.only(bottom: 5),
-                      color: controller.selectedIndex.value == index
+                      color: (controller.selectedIndex.value == index &&
+                              controller.selectedIndex.value != null)
                           ? primaryColor
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                           side: BorderSide(
-                              width: controller.selectedIndex.value == index
+                              width: (controller.selectedIndex.value == index &&
+                                      controller.selectedIndex.value != null)
                                   ? 1.5
                                   : 0.7,
-                              color: controller.selectedIndex.value == index
+                              color: (controller.selectedIndex.value == index &&
+                                      controller.selectedIndex.value != null)
                                   ? primaryColor
                                   : borderColor),
                           borderRadius: BorderRadius.circular(10)),
@@ -49,7 +52,8 @@ class HorizontalCategory extends StatelessWidget {
                             SvgPicture.asset(
                               data.catImage,
                               height: 20,
-                              color: controller.selectedIndex.value == index
+                              color: (controller.selectedIndex.value == index &&
+                                      controller.selectedIndex.value != null)
                                   ? whiteColor
                                   : txtColor,
                             ),
@@ -61,7 +65,9 @@ class HorizontalCategory extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.nunito(
                                 fontWeight: FontWeight.bold,
-                                color: controller.selectedIndex.value == index
+                                color: (controller.selectedIndex.value ==
+                                            index &&
+                                        controller.selectedIndex.value != null)
                                     ? whiteColor
                                     : txtColor,
                               ),

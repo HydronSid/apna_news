@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'appcolors.dart';
-import 'local_shared_preferences.dart';
 
 class CommonFunctions {
   static var globalContext = NavigationService.navigatorKey.currentContext!;
@@ -168,7 +167,6 @@ class CommonFunctions {
   }
 
   void logOut() async {
-    LocalPreferences().setLoginBool(false);
     final preferences = await SharedPreferences.getInstance();
     await preferences.clear();
     Get.offAllNamed(RouteNames.splashScreen);

@@ -1,7 +1,6 @@
+import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/images.dart';
-import 'package:apna_news/Utils/local_shared_preferences.dart';
-import 'package:apna_news/Utils/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -14,19 +13,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    Future.delayed(const Duration(seconds: 3), () async {
-      bool isLogin = await LocalPreferences().getLoginBool() ?? false;
-
-      if (isLogin) {
-        Get.toNamed(RouteNames.homeScreen);
-      } else {
-        Get.toNamed(RouteNames.homeScreen);
-      }
-    });
-    super.initState();
-  }
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

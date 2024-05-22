@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'Components/category_list.dart';
 import 'Components/home_custom_bar.dart';
+import 'Components/horizontal_headlines.dart';
 import 'Components/pinnedappbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final controller = Get.put(HomeController());
+  HomeController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -46,7 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 10,
             ),
-            const HorizontalCategory()
+            const HorizontalCategory(),
+            const HorizontalListCategory(
+              title: "Top HeadLines",
+            )
           ]))
         ],
       )),

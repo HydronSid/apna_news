@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 import 'app_base_api_services.dart';
 import 'app_exceptions.dart';
 import 'common_functions.dart';
-import 'local_shared_preferences.dart';
 
 class NetworkAPIService extends BaseApiService {
   Dio dio = Dio();
@@ -58,15 +57,13 @@ class NetworkAPIService extends BaseApiService {
     String url,
   ) async {
     dynamic responseJson;
-    String storedToken = await LocalPreferences().getAuthToken() ?? "";
-    log("Token : $storedToken");
+
     try {
       final response = await get(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $storedToken',
         },
       ).timeout(const Duration(seconds: 30));
 
@@ -96,8 +93,6 @@ class NetworkAPIService extends BaseApiService {
     dynamic data,
   ) async {
     dynamic responseJson;
-    String storedToken = await LocalPreferences().getAuthToken() ?? "";
-    log("Token : $storedToken");
 
     try {
       http.Response response = await post(
@@ -106,7 +101,6 @@ class NetworkAPIService extends BaseApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $storedToken',
         },
       ).timeout(const Duration(seconds: 30));
 
@@ -135,15 +129,13 @@ class NetworkAPIService extends BaseApiService {
     String url,
   ) async {
     dynamic responseJson;
-    String storedToken = await LocalPreferences().getAuthToken() ?? "";
-    log("Token : $storedToken");
+
     try {
       http.Response response = await delete(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $storedToken',
         },
       ).timeout(const Duration(seconds: 30));
 
@@ -171,8 +163,7 @@ class NetworkAPIService extends BaseApiService {
     dynamic data,
   ) async {
     dynamic responseJson;
-    String storedToken = await LocalPreferences().getAuthToken() ?? "";
-    log("Token : $storedToken");
+
     try {
       http.Response response = await delete(
         Uri.parse(url),
@@ -180,7 +171,6 @@ class NetworkAPIService extends BaseApiService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer $storedToken',
         },
       ).timeout(const Duration(seconds: 30));
       log("responseBody : ${response.body}");
