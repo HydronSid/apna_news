@@ -1,0 +1,48 @@
+import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/route_names.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+
+import 'Screens/splash_screen.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: whiteColor, statusBarIconBrightness: Brightness.dark));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((value) => runApp(const MyApp()));
+  runApp(const MyApp());
+}
+
+class NavigationService {
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      builder: (context, child) {
+        child = EasyLoading.init()(context, child);
+        child = MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+            child: child);
+        return child;
+      },
+      title: 'Event Management',
+      navigatorKey: NavigationService.navigatorKey,
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      getPages: AppRoute.appRoutes(),
+      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
