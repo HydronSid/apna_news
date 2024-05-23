@@ -46,6 +46,7 @@ dependencies:
   flutter_svg: ^2.0.5
   shimmer: ^3.0.0
   cached_network_image: ^3.2.3
+  nb_utils: ^6.0.0
 
 dev_dependencies:
   flutter_test:

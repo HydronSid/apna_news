@@ -21,7 +21,11 @@ class ViewHeadlinesController extends GetxController {
 
   void setSelectedOption(SortType option) {
     selectedOption.value = option;
-    getArticleList(1, "init", option.toString().split('.').last, "general");
+  }
+
+  onSubmit() {
+    getArticleList(
+        1, "init", selectedOption.value.toString().split('.').last, "general");
   }
 
   @override

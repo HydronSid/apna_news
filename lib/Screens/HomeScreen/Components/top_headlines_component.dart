@@ -1,7 +1,9 @@
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/custom_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
@@ -84,22 +86,26 @@ class TopHeadLineComponent extends StatelessWidget {
                         fontWeight: FontWeight.w500, color: blackColor),
                   ),
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "Read Full Artical",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.normal, color: blackColor),
-                      ),
-                      const Icon(
-                        Icons.arrow_right_alt_rounded,
-                        color: blackColor,
-                      )
-                    ],
+                  InkWell(
+                    onTap: () => Get.toNamed(RouteNames.articleDetail,
+                        arguments: {"article": model}),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Read Full Artical",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.normal, color: blackColor),
+                        ),
+                        const Icon(
+                          Icons.arrow_right_alt_rounded,
+                          color: blackColor,
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),

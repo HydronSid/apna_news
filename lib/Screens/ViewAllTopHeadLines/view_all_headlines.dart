@@ -1,12 +1,11 @@
 import 'package:apna_news/Controllers/view_top_headlines_controller.dart';
 import 'package:apna_news/Screens/ViewAllTopHeadLines/Components/article_component.dart';
-import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Widgets/common_appbar.dart';
 import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'Components/top_category.dart';
 
@@ -30,16 +29,7 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: whiteColor,
-        iconTheme: const IconThemeData(color: txtColor),
-        title: Text(
-          "Top HeadLines",
-          style:
-              GoogleFonts.poppins(color: txtColor, fontWeight: FontWeight.w500),
-        ),
-      ),
+      appBar: commonAppBar(title: "Top HeadLines"),
       body: CustomScrollView(
         controller: controller.scrollController,
         slivers: [

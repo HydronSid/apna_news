@@ -16,4 +16,23 @@ class AppConstants {
   ];
 
   List sortType = ["Relevancy", "Popularity", "PublishedAt"];
+
+  List<LanguageModel> languageList = [
+    LanguageModel(launguage: "Arabic", code: "ar"),
+    LanguageModel(launguage: "German", code: "de"),
+    LanguageModel(launguage: "English", code: "en"),
+    LanguageModel(launguage: "Spanish", code: "es"),
+    LanguageModel(launguage: "French", code: "fr"),
+    LanguageModel(launguage: "Hebrew", code: "he"),
+    LanguageModel(launguage: "Italian", code: "it"),
+    LanguageModel(launguage: "Dutch", code: "nl"),
+    LanguageModel(launguage: "Norwegian", code: "no"),
+    LanguageModel(launguage: "Portuguese", code: "pt"),
+    LanguageModel(launguage: "Russian", code: "ru"),
+    LanguageModel(launguage: "Swedish", code: "sv"),
+    LanguageModel(launguage: "Chinese", code: "zh"),
+  ];
+
+  List<String> languageNameList =
+      AppConstants().languageList.map((e) => e.launguage).toList();
 }

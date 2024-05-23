@@ -1,5 +1,7 @@
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeCustomAppBar extends StatelessWidget {
   final Widget passedWidget;
@@ -30,13 +32,13 @@ class HomeCustomAppBar extends StatelessWidget {
                 children: [
                   passedWidget,
                   const Spacer(),
-                  const InkWell(
-                      //  onTap: () => CommonFunctions().checkIfLogin("Cart"),
-                      child: Icon(
-                    Icons.settings,
-                    color: txtColor,
-                    size: 28,
-                  )),
+                  InkWell(
+                      onTap: () => Get.toNamed(RouteNames.settingsScreen),
+                      child: const Icon(
+                        Icons.settings,
+                        color: txtColor,
+                        size: 28,
+                      )),
                 ],
               ),
             ],

@@ -43,9 +43,10 @@ class HomeRepository {
 
   Future<Either<Failure, TopHeadLineModel>> getNewsChannelHeadlines(
       String selectedCat) async {
+    String language = await LocalPreferences().getLanguage() ?? "en";
     try {
       var response = await apiService.getGetApiResponse(
-        "${RemoteUrls.homeEverythingList}&q=$selectedCat",
+        "${RemoteUrls.homeEverythingList}&q=$selectedCat&language=$language",
       );
 
       return right(TopHeadLineModel.fromJson(response));
@@ -57,9 +58,10 @@ class HomeRepository {
   Future<Either<Failure, TopHeadLinePaginatedModel>>
       getNewsChannelHeadlinesPagination(
           int offset, String sortBy, String catType) async {
+    String language = await LocalPreferences().getLanguage() ?? "en";
     try {
       var response = await apiService.getGetApiResponse(
-        "${RemoteUrls.homeEverythingListPagination}&q=$catType&pageSize=20&page=$offset&sortBy=$sortBy",
+        "${RemoteUrls.homeEverythingListPagination}&q=$catType&pageSize=20&page=$offset&sortBy=$sortBy&language=$language",
       );
 
       return right(TopHeadLinePaginatedModel.fromJson(response, offset));

@@ -1,6 +1,9 @@
 import 'package:apna_news/Controllers/view_news_controller.dart';
+import 'package:apna_news/Screens/ViewAllTopHeadLines/Components/article_component.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Widgets/common_appbar.dart';
+import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,16 +21,7 @@ class _ViewAllNewsState extends State<ViewAllNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: whiteColor,
-        iconTheme: const IconThemeData(color: txtColor),
-        title: Text(
-          "News",
-          style:
-              GoogleFonts.poppins(color: txtColor, fontWeight: FontWeight.w500),
-        ),
-      ),
+      appBar: commonAppBar(title: "News"),
       body: CustomScrollView(
         controller: controller.scrollController,
         slivers: [
@@ -93,7 +87,7 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                                     shrinkWrap: true,
                                     itemBuilder: (context, index) {
                                       final option = SortType.values[index];
-                                      return RadioListTile(
+                                      return Obx(() => RadioListTile(
                                           dense: true,
                                           visualDensity: VisualDensity.compact,
                                           contentPadding: EdgeInsets.zero,
@@ -116,7 +110,7 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                                               controller
                                                   .setSelectedOption(value);
                                             }
-                                          });
+                                          }));
                                     },
                                     separatorBuilder: (context, index) {
                                       return const SizedBox(
@@ -127,7 +121,10 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                                 SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.back();
+                                        controller.onSubmit();
+                                      },
                                       child: const Text("Submit")),
                                 )
                               ],
@@ -165,55 +162,51 @@ class _ViewAllNewsState extends State<ViewAllNews> {
             const SizedBox(
               height: 10,
             ),
-
-            const SizedBox(
-              height: 10,
-            ),
-            // Obx(
-            //   () => controller.isLoading.value
-            //       ? ListView.separated(
-            //           shrinkWrap: true,
-            //           padding: const EdgeInsets.symmetric(
-            //               horizontal: 10, vertical: 10),
-            //           separatorBuilder: (context, index) {
-            //             return const SizedBox(
-            //               height: 20,
-            //             );
-            //           },
-            //           physics: const NeverScrollableScrollPhysics(),
-            //           itemCount: 5,
-            //           itemBuilder: (context, index) {
-            //             return shimmerCard();
-            //           },
-            //         )
-            //       : PaginatedListView(
-            //           scrollController: controller.scrollController,
-            //           enabledPagination: true,
-            //           offset: controller.paginatedModel.value!.offset,
-            //           onPaginate: (int? offset) async {
-            //             // await controller.getArticleList(offset!, "viewmore",
-            //             //     controller.selectedCat.toString());
-            //           },
-            //           reverse: false,
-            //           totalSize: controller.paginatedModel.value!.totalSize,
-            //           itemView: ListView.separated(
-            //             separatorBuilder: (context, index) {
-            //               return const SizedBox(
-            //                 height: 20,
-            //               );
-            //             },
-            //             physics: const NeverScrollableScrollPhysics(),
-            //             padding: const EdgeInsets.symmetric(
-            //                 horizontal: 5, vertical: 5),
-            //             itemCount: controller.articalList.length,
-            //             shrinkWrap: true,
-            //             itemBuilder: (context, index) {
-            //               var article = controller.articalList[index];
-            //               return ArticleComponent(article: article);
-            //             },
-            //           ),
-            //         ),
-            // )
+            Obx(
+              () => controller.isLoading.value
+                  ? ListView.separated(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 20,
+                        );
+                      },
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return shimmerCard();
+                      },
+                    )
+                  : PaginatedListView(
+                      scrollController: controller.scrollController,
+                      enabledPagination: true,
+                      offset: controller.paginatedModel.value!.offset,
+                      onPaginate: (int? offset) async {
+                        // await controller.getArticleList(offset!, "viewmore",
+                        //     controller.selectedCat.toString());
+                      },
+                      reverse: false,
+                      totalSize: controller.paginatedModel.value!.totalSize,
+                      itemView: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 20,
+                          );
+                        },
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 5),
+                        itemCount: controller.articalList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var article = controller.articalList[index];
+                          return ArticleComponent(article: article);
+                        },
+                      ),
+                    ),
+            )
           ]))
         ],
       ),
