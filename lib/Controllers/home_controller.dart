@@ -2,7 +2,6 @@ import 'package:apna_news/Models/category_model.dart';
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Repositories/home_repository.dart';
 import 'package:apna_news/Utils/common_functions.dart';
-import 'package:apna_news/Utils/route_names.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -17,8 +16,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    getTopHeadLineList("general")
-        .then((value) => Get.toNamed(RouteNames.homeScreen));
+    // getTopHeadLineList("general")
+    //     .then((value) => Get.toNamed(RouteNames.homeScreen));
     super.onInit();
   }
 

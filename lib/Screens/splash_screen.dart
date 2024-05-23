@@ -1,6 +1,7 @@
 import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/images.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -14,6 +15,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final controller = Get.put(HomeController());
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 3), () async {
+      Get.toNamed(RouteNames.homeScreen);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,7 @@
 import 'package:apna_news/Controllers/view_top_headlines_controller.dart';
+import 'package:apna_news/Screens/ViewAllHeadLines/Components/article_component.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +17,13 @@ class ViewAllHeadLines extends StatefulWidget {
 
 class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
   final controller = Get.put(ViewTopHeadlinesController());
+
+  @override
+  void dispose() {
+    Get.delete<ViewTopHeadlinesController>();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +38,7 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
         ),
       ),
       body: CustomScrollView(
+        controller: controller.scrollController,
         slivers: [
           SliverList(
               delegate: SliverChildListDelegate([
@@ -36,6 +46,37 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
               height: 10,
             ),
             const HeadLineHorizontalCategory(),
+            Obx(
+              () => controller.isLoading.value
+                  ? const SizedBox()
+                  : PaginatedListView(
+                      scrollController: controller.scrollController,
+                      enabledPagination: true,
+                      offset: controller.paginatedModel.value!.offset,
+                      onPaginate: (int? offset) async {
+                        await controller.getArticleList(offset!, "viewmore",
+                            controller.selectedCat.toString());
+                      },
+                      reverse: false,
+                      totalSize: controller.paginatedModel.value!.totalSize,
+                      itemView: ListView.separated(
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 20,
+                          );
+                        },
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 5),
+                        itemCount: controller.articalList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var article = controller.articalList[index];
+                          return ArticleComponent(article: article);
+                        },
+                      ),
+                    ),
+            )
           ]))
         ],
       ),

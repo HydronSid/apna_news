@@ -40,7 +40,7 @@ class CustomImage extends StatelessWidget {
       ),
       errorWidget: (context, url, error) => Image.asset(
         Images.noImageError,
-        fit: BoxFit.fill,
+        fit: BoxFit.fitWidth,
       ),
     );
   }
