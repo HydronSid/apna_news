@@ -41,27 +41,31 @@ class ArticleComponent extends StatelessWidget {
                   article.title.toString(),
                   maxLines: 3,
                   style: GoogleFonts.poppins(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: txtColor,
                       fontWeight: FontWeight.w700),
                 ),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Expanded(
                       child: Text(
                         article.source!.name.toString(),
                         style: GoogleFonts.poppins(
-                            fontSize: 13,
-                            color: Colors.black54,
+                            fontSize: 12,
+                            color: primaryColor,
                             fontWeight: FontWeight.w600),
                       ),
+                    ),
+                    const SizedBox(
+                      width: 10,
                     ),
                     Text(
                       format.format(dateTime),
                       style: GoogleFonts.poppins(
-                          fontSize: 13, fontWeight: FontWeight.w500),
+                          fontSize: 12, fontWeight: FontWeight.w500),
                     ),
                   ],
                 )

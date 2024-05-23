@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'top_headlines_component.dart';
+
 class HorizontalListCategory extends StatelessWidget {
   final String title;
 
@@ -60,54 +62,54 @@ class HorizontalListCategory extends StatelessWidget {
                     ],
                   ),
                 ),
-          // Obx(
-          //   () => SizedBox(
-          //     child: controller.isLoading.value
-          //         // child: true
-          //         ? SizedBox(
-          //             height: 320,
-          //             child: ListView.separated(
-          //               padding: const EdgeInsets.symmetric(
-          //                   horizontal: 10, vertical: 10),
-          //               separatorBuilder: (context, index) {
-          //                 return const SizedBox(
-          //                   width: 20,
-          //                 );
-          //               },
-          //               physics: const BouncingScrollPhysics(),
-          //               scrollDirection: Axis.horizontal,
-          //               itemCount: 5,
-          //               itemBuilder: (context, index) {
-          //                 return shimmerCard();
-          //               },
-          //             ),
-          //           )
-          //         : controller.articalList.isEmpty
-          //             ? const SizedBox()
-          //             : SizedBox(
-          //                 height: 320,
-          //                 child: ListView.separated(
-          //                   padding: const EdgeInsets.symmetric(horizontal: 10),
-          //                   separatorBuilder: (context, index) {
-          //                     return const SizedBox(
-          //                       width: 20,
-          //                     );
-          //                   },
-          //                   physics: const BouncingScrollPhysics(),
-          //                   scrollDirection: Axis.horizontal,
-          //                   itemCount: controller.articalList.length < 8
-          //                       ? controller.articalList.length
-          //                       : 8,
-          //                   itemBuilder: (context, index) {
-          //                     var article = controller.articalList[index];
-          //                     return TopHeadLineComponent(
-          //                       model: article,
-          //                     );
-          //                   },
-          //                 ),
-          //               ),
-          //   ),
-          // )
+          Obx(
+            () => SizedBox(
+              child: controller.isLoading.value
+                  // child: true
+                  ? SizedBox(
+                      height: 320,
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            width: 20,
+                          );
+                        },
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return shimmerCard();
+                        },
+                      ),
+                    )
+                  : controller.articalList.isEmpty
+                      ? const SizedBox()
+                      : SizedBox(
+                          height: 320,
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                width: 20,
+                              );
+                            },
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller.articalList.length < 8
+                                ? controller.articalList.length
+                                : 8,
+                            itemBuilder: (context, index) {
+                              var article = controller.articalList[index];
+                              return TopHeadLineComponent(
+                                model: article,
+                              );
+                            },
+                          ),
+                        ),
+            ),
+          ),
         ],
       ),
     );

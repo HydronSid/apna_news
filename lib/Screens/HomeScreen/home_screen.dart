@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'Components/category_list.dart';
 import 'Components/home_custom_bar.dart';
 import 'Components/horizontal_headlines.dart';
+import 'Components/news_vertical_headlines.dart';
 import 'Components/pinnedappbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -50,6 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const HorizontalCategory(),
             const HorizontalListCategory(
               title: "Top HeadLines",
+            ),
+            const VerticalListCategory(
+              title: "News",
             )
           ]))
         ],

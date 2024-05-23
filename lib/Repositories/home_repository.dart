@@ -40,4 +40,18 @@ class HomeRepository {
       return Left(ServerFailure(e.message, e.statusCode));
     }
   }
+
+  Future<Either<Failure, TopHeadLineModel>> getNewsChannelHeadlines(
+      String selectedCat) async {
+    String country = await LocalPreferences().getCountry() ?? "in";
+    try {
+      var response = await apiService.getGetApiResponse(
+        "${RemoteUrls.everythingList}&q=$selectedCat",
+      );
+
+      return right(TopHeadLineModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message, e.statusCode));
+    }
+  }
 }

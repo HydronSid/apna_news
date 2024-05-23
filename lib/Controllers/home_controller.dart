@@ -2,6 +2,7 @@ import 'package:apna_news/Models/category_model.dart';
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Repositories/home_repository.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -9,6 +10,7 @@ class HomeController extends GetxController {
   RxBool isLoading = false.obs;
 
   RxList<ArticleModel> articalList = <ArticleModel>[].obs;
+  RxList<ArticleModel> newsArticalList = <ArticleModel>[].obs;
 
   loadingFun(bool val) {
     isLoading.value = val;
@@ -16,8 +18,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    // getTopHeadLineList("general")
-    //     .then((value) => Get.toNamed(RouteNames.homeScreen));
+    getTopHeadLineList("general").then((value) => getNewsHeadLineList("general")
+        .then((value) => Get.toNamed(RouteNames.homeScreen)));
     super.onInit();
   }
 
@@ -26,7 +28,8 @@ class HomeController extends GetxController {
 
   changeSelectedIndex(int index, CategoryModel model) {
     selectedIndex.value = index;
-    getTopHeadLineList(model.catName.toLowerCase());
+    //getTopHeadLineList(model.catName.toLowerCase());
+    getNewsHeadLineList(model.catName.toLowerCase());
   }
 
   Future getTopHeadLineList(String selectedCat) async {
@@ -39,6 +42,20 @@ class HomeController extends GetxController {
       loadingFun(false);
     }, (data) {
       articalList.value = data.articles ?? [];
+      loadingFun(false);
+    });
+  }
+
+  Future getNewsHeadLineList(String selectedCat) async {
+    loadingFun(true);
+    newsArticalList.clear();
+    var result = await homeRepository.getNewsChannelHeadlines(selectedCat);
+
+    result.fold((error) {
+      CommonFunctions.showErrorSnackbar(error.message);
+      loadingFun(false);
+    }, (data) {
+      newsArticalList.value = data.articles ?? [];
       loadingFun(false);
     });
   }

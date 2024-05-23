@@ -8,6 +8,6 @@ class RemoteUrls {
   static String topHeadLines =
       "$baseUrl/top-headlines?apiKey=${AppConstants.apiKey}";
 
-  static String categoryList =
-      "$baseUrl/everything?apiKey=${AppConstants.apiKey}&q=";
+  static String everythingList =
+      "$baseUrl/everything?apiKey=${AppConstants.apiKey}&pageSize=20&page=1";
 }
