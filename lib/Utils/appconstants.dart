@@ -14,4 +14,6 @@ class AppConstants {
     CategoryModel(catName: "Sports", catImage: Images.sports),
     CategoryModel(catName: "Technology", catImage: Images.technology),
   ];
+
+  List sortType = ["Relevancy", "Popularity", "PublishedAt"];
 }

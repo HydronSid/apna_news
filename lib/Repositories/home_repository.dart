@@ -43,13 +43,26 @@ class HomeRepository {
 
   Future<Either<Failure, TopHeadLineModel>> getNewsChannelHeadlines(
       String selectedCat) async {
-    String country = await LocalPreferences().getCountry() ?? "in";
     try {
       var response = await apiService.getGetApiResponse(
-        "${RemoteUrls.everythingList}&q=$selectedCat",
+        "${RemoteUrls.homeEverythingList}&q=$selectedCat",
       );
 
       return right(TopHeadLineModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message, e.statusCode));
+    }
+  }
+
+  Future<Either<Failure, TopHeadLinePaginatedModel>>
+      getNewsChannelHeadlinesPagination(
+          int offset, String sortBy, String catType) async {
+    try {
+      var response = await apiService.getGetApiResponse(
+        "${RemoteUrls.homeEverythingListPagination}&q=$catType&pageSize=20&page=$offset&sortBy=$sortBy",
+      );
+
+      return right(TopHeadLinePaginatedModel.fromJson(response, offset));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, e.statusCode));
     }

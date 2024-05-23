@@ -1,7 +1,8 @@
 import 'package:apna_news/Controllers/home_controller.dart';
-import 'package:apna_news/Screens/ViewAllHeadLines/Components/article_component.dart';
+import 'package:apna_news/Screens/ViewAllTopHeadLines/Components/article_component.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -103,10 +104,10 @@ class VerticalListCategory extends StatelessWidget {
                 style: TextButton.styleFrom(
                     shape: const StadiumBorder(),
                     side: const BorderSide(color: accentColor)),
-                onPressed: () {},
+                onPressed: () => Get.toNamed(RouteNames.viewAllNews),
                 icon: const Icon(Icons.add_circle_outline_sharp,
                     color: accentColor),
-                label: Text('View More Items',
+                label: Text('View More News',
                     style: GoogleFonts.poppins(
                         color: accentColor,
                         fontSize: 12,
