@@ -1,3 +1,4 @@
+import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class HomeCustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.find();
     return SliverAppBar(
         toolbarHeight: 40,
         automaticallyImplyLeading: false,
@@ -33,7 +35,14 @@ class HomeCustomAppBar extends StatelessWidget {
                   passedWidget,
                   const Spacer(),
                   InkWell(
-                      onTap: () => Get.toNamed(RouteNames.settingsScreen),
+                      onTap: () {
+                        controller.selectedIndex.value = 0;
+                        Get.toNamed(RouteNames.settingsScreen)!.then((value) =>
+                            controller.getTopHeadLineList("general").then(
+                                (value) => controller
+                                    .getNewsHeadLineList("general")
+                                    .then((value))));
+                      },
                       child: const Icon(
                         Icons.settings,
                         color: txtColor,

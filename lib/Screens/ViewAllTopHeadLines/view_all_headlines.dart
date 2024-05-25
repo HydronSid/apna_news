@@ -30,62 +30,65 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: commonAppBar(title: "Top HeadLines"),
-      body: CustomScrollView(
-        controller: controller.scrollController,
-        slivers: [
-          SliverList(
-              delegate: SliverChildListDelegate([
-            const SizedBox(
-              height: 10,
-            ),
-            const HeadLineHorizontalCategory(),
-            Obx(
-              () => controller.isLoading.value
-                  ? ListView.separated(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 20,
-                        );
-                      },
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return shimmerCard();
-                      },
-                    )
-                  : PaginatedListView(
-                      scrollController: controller.scrollController,
-                      enabledPagination: true,
-                      offset: controller.paginatedModel.value!.offset,
-                      onPaginate: (int? offset) async {
-                        await controller.getArticleList(offset!, "viewmore",
-                            controller.selectedCat.toString());
-                      },
-                      reverse: false,
-                      totalSize: controller.paginatedModel.value!.totalSize,
-                      itemView: ListView.separated(
+      body: RefreshIndicator(
+        onRefresh: () async => controller.initRefreshData(),
+        child: CustomScrollView(
+          controller: controller.scrollController,
+          slivers: [
+            SliverList(
+                delegate: SliverChildListDelegate([
+              const SizedBox(
+                height: 10,
+              ),
+              const HeadLineHorizontalCategory(),
+              Obx(
+                () => controller.isLoading.value
+                    ? ListView.separated(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         separatorBuilder: (context, index) {
                           return const SizedBox(
                             height: 20,
                           );
                         },
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        itemCount: controller.articalList.length,
-                        shrinkWrap: true,
+                        itemCount: 5,
                         itemBuilder: (context, index) {
-                          var article = controller.articalList[index];
-                          return ArticleComponent(article: article);
+                          return shimmerCard();
                         },
+                      )
+                    : PaginatedListView(
+                        scrollController: controller.scrollController,
+                        enabledPagination: true,
+                        offset: controller.paginatedModel.value!.offset,
+                        onPaginate: (int? offset) async {
+                          await controller.getArticleList(offset!, "viewmore",
+                              controller.selectedCat.toString());
+                        },
+                        reverse: false,
+                        totalSize: controller.paginatedModel.value!.totalSize,
+                        itemView: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 20,
+                            );
+                          },
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          itemCount: controller.articalList.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            var article = controller.articalList[index];
+                            return ArticleComponent(article: article);
+                          },
+                        ),
                       ),
-                    ),
-            )
-          ]))
-        ],
+              )
+            ]))
+          ],
+        ),
       ),
     );
   }

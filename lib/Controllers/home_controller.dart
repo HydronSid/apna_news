@@ -23,6 +23,12 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  initData() {
+    selectedIndex.value = 0;
+    getTopHeadLineList("general")
+        .then((value) => getNewsHeadLineList("general").then((value)));
+  }
+
   // late Rx<int?> selectedIndex = Rx<int?>(null);
   RxInt selectedIndex = 0.obs;
 
@@ -42,7 +48,6 @@ class HomeController extends GetxController {
       loadingFun(false);
     }, (data) {
       articalList.value = data.articles ?? [];
-      loadingFun(false);
     });
   }
 

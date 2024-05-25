@@ -32,6 +32,11 @@ class ViewTopHeadlinesController extends GetxController {
     super.onInit();
   }
 
+  initRefreshData() {
+    selectedIndex.value = 0;
+    getArticleList(1, "init", "general");
+  }
+
   // late Rx<int?> selectedIndex = Rx<int?>(null);
   RxInt selectedIndex = 0.obs;
 

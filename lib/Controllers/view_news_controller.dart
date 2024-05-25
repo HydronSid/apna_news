@@ -24,6 +24,19 @@ class ViewNewsController extends GetxController {
     selectedOption.value = option;
   }
 
+  initRefreshData() {
+    getArticleList(
+      1,
+      "init",
+      "publishedat",
+    );
+    initFilter();
+    offset = 1;
+    checkboxValuesMap.clear();
+    finalFilterQuery.value = "";
+    selectedOption.value = SortType.publishedat;
+  }
+
   onSubmit() {
     getArticleList(
       1,
