@@ -57,11 +57,18 @@ class HomeRepository {
 
   Future<Either<Failure, TopHeadLinePaginatedModel>>
       getNewsChannelHeadlinesPagination(
-          int offset, String sortBy, String catType) async {
+          int offset, String sortBy, String query) async {
     String language = await LocalPreferences().getLanguage() ?? "en";
+    String finalQuery = "";
+    if (query.isEmpty) {
+      finalQuery = "q=general";
+    } else {
+      finalQuery = query;
+    }
+
     try {
       var response = await apiService.getGetApiResponse(
-        "${RemoteUrls.homeEverythingListPagination}&pageSize=20&page=$offset&sortBy=$sortBy&language=$language&q=$catType",
+        "${RemoteUrls.homeEverythingListPagination}&$finalQuery&pageSize=20&page=$offset&sortBy=$sortBy&language=$language",
       );
 
       return right(TopHeadLinePaginatedModel.fromJson(response, offset));

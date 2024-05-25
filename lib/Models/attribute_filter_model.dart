@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class Attribute {
   final String? attributeName;
   final String? attributecode;
@@ -9,11 +11,7 @@ class Attribute {
 class FilterModel {
   final String? value;
   final String? code;
-  bool isSelected;
+  RxBool? isSelected;
 
-  set changeIsSelected(bool val) {
-    isSelected = val;
-  }
-
-  FilterModel({this.value, this.isSelected = false, required this.code});
+  FilterModel({this.value, this.isSelected, required this.code});
 }

@@ -2,6 +2,7 @@ class Images {
   static const appLogo = "assets/images/app_logo.png";
   static const appLoader = "assets/images/app_loader.json";
   static const noImageError = "assets/images/no_image_error.jpg";
+  static const emptyData = "assets/images/empty.gif";
 
   static const business = "assets/svg_images/business.svg";
   static const entertainment = "assets/svg_images/entertainment.svg";

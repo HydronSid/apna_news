@@ -33,7 +33,7 @@ class NetworkAPIService extends BaseApiService {
         },
       ).timeout(const Duration(seconds: 30));
 
-      log(response.body.toString());
+      // log(response.body.toString());
 
       responseJson = _responseParser(response, "GET");
     } on SocketException {

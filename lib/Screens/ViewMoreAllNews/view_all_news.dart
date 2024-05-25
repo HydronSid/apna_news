@@ -4,6 +4,7 @@ import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
+import 'package:apna_news/Widgets/no_data_found.dart';
 import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class ViewAllNews extends StatefulWidget {
 }
 
 class _ViewAllNewsState extends State<ViewAllNews> {
-  final controller = Get.put(ViewHeadlinesController());
+  final controller = Get.put(ViewNewsController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -183,33 +184,41 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                         return shimmerCard();
                       },
                     )
-                  : PaginatedListView(
-                      scrollController: controller.scrollController,
-                      enabledPagination: true,
-                      offset: controller.paginatedModel.value!.offset,
-                      onPaginate: (int? offset) async {
-                        // await controller.getArticleList(offset!, "viewmore",
-                        //     controller.selectedCat.toString());
-                      },
-                      reverse: false,
-                      totalSize: controller.paginatedModel.value!.totalSize,
-                      itemView: ListView.separated(
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 20,
-                          );
-                        },
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 5),
-                        itemCount: controller.articalList.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          var article = controller.articalList[index];
-                          return ArticleComponent(article: article);
-                        },
-                      ),
-                    ),
+                  : controller.articalList.isEmpty
+                      ? const NoDataFoundScreen(passedData: "No Artical Found.")
+                      : PaginatedListView(
+                          scrollController: controller.scrollController,
+                          enabledPagination: true,
+                          offset: controller.paginatedModel.value!.offset,
+                          onPaginate: (int? offset) async {
+                            await controller.getArticleList(
+                              offset!,
+                              "viewmore",
+                              controller.selectedOption.value
+                                  .toString()
+                                  .split('.')
+                                  .last,
+                            );
+                          },
+                          reverse: false,
+                          totalSize: controller.paginatedModel.value!.totalSize,
+                          itemView: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 20,
+                              );
+                            },
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            itemCount: controller.articalList.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              var article = controller.articalList[index];
+                              return ArticleComponent(article: article);
+                            },
+                          ),
+                        ),
             )
           ]))
         ],
