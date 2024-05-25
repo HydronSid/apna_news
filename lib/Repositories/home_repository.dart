@@ -61,7 +61,7 @@ class HomeRepository {
     String language = await LocalPreferences().getLanguage() ?? "en";
     try {
       var response = await apiService.getGetApiResponse(
-        "${RemoteUrls.homeEverythingListPagination}&q=$catType&pageSize=20&page=$offset&sortBy=$sortBy&language=$language",
+        "${RemoteUrls.homeEverythingListPagination}&pageSize=20&page=$offset&sortBy=$sortBy&language=$language&q=$catType",
       );
 
       return right(TopHeadLinePaginatedModel.fromJson(response, offset));

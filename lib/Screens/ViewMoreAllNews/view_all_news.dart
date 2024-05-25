@@ -2,6 +2,7 @@ import 'package:apna_news/Controllers/view_news_controller.dart';
 import 'package:apna_news/Screens/ViewAllTopHeadLines/Components/article_component.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/common_functions.dart';
+import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
 import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
@@ -33,25 +34,28 @@ class _ViewAllNewsState extends State<ViewAllNews> {
               child: Row(
                 children: [
                   Expanded(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.filter_alt_outlined,
-                        color: txtColor,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Filter",
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w500,
+                      child: InkWell(
+                    onTap: () => Get.toNamed(RouteNames.filterScreen),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.filter_alt_outlined,
                           color: txtColor,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Filter",
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            color: txtColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   )),
                   Expanded(
                       child: InkWell(

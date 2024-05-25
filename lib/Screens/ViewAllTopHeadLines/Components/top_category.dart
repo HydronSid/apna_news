@@ -22,7 +22,7 @@ class HeadLineHorizontalCategory extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 10),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              var data = AppConstants().categoryList[index];
+              var data = AppConstants.categoryList[index];
               return InkWell(
                   onTap: () => controller.changeSelectedIndex(index, data),
                   child: Obx(
@@ -78,7 +78,7 @@ class HeadLineHorizontalCategory extends StatelessWidget {
                 width: 10,
               );
             },
-            itemCount: AppConstants().categoryList.length),
+            itemCount: AppConstants.categoryList.length),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:apna_news/Screens/ArticleDetail/article_detail.dart';
 import 'package:apna_news/Screens/HomeScreen/home_screen.dart';
 import 'package:apna_news/Screens/Settings/settings.dart';
 import 'package:apna_news/Screens/ViewAllTopHeadLines/view_all_headlines.dart';
+import 'package:apna_news/Screens/ViewMoreAllNews/Filter/filter_screen.dart';
 import 'package:apna_news/Screens/ViewMoreAllNews/view_all_news.dart';
 import 'package:apna_news/Screens/splash_screen.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class RouteNames {
   static const String viewAllNews = "/view_all_news";
   static const String articleDetail = "/article_detail";
   static const String settingsScreen = "/settings_screen";
+  static const String filterScreen = "/filter_screen";
 }
 
 class AppRoute {
@@ -45,6 +47,11 @@ class AppRoute {
         GetPage(
             name: RouteNames.settingsScreen,
             page: () => const SettingsScreen(),
+            transition: Transition.rightToLeftWithFade,
+            transitionDuration: const Duration(milliseconds: 250)),
+        GetPage(
+            name: RouteNames.filterScreen,
+            page: () => const FilterScreen(),
             transition: Transition.rightToLeftWithFade,
             transitionDuration: const Duration(milliseconds: 250)),
       ];

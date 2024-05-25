@@ -1,4 +1,5 @@
 import 'package:apna_news/Controllers/settings_controller.dart';
+import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/appconstants.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
@@ -30,41 +31,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              Text(
+                "Select Language",
+                style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500, letterSpacing: 0.5),
+              ),
               Obx(() {
                 return Wrap(
-                  // list of length 3
-                  children: List.generate(
-                    AppConstants().languageNameList.length,
-                    (int index) {
-                      // choice chip allow us to
-                      // set its properties.
-                      return ChoiceChip(
-                        padding: const EdgeInsets.all(8),
-                        label: Text('Item $index'),
-                        // color of selected chip
-                        selectedColor: Colors.green,
-                        // selected chip value
-                        selected: controller.selectedValue.value == index,
-                        // onselected method
-                        onSelected: (bool selected) {
-                          // setState(() {
-                          //   _value = selected ? index : null;
-                          // });
-                        },
-                      );
-                    },
-                  ).toList(),
+                  spacing: 8.0,
+                  children: AppConstants().languageList.map((language) {
+                    return ChoiceChip(
+                      label: Text(
+                        language.launguage,
+                        style: GoogleFonts.poppins(
+                            color: controller.selectedLanguage.value ==
+                                    language.launguage
+                                ? whiteColor
+                                : blackColor),
+                      ),
+                      selectedColor: primaryColor,
+                      selected: controller.selectedLanguage.value ==
+                          language.launguage,
+                      onSelected: (bool selected) {
+                        if (selected) {
+                          controller.changeSelectedValue(language.launguage);
+                        }
+                      },
+                    );
+                  }).toList(),
                 );
               }),
-              Row(
-                children: [
-                  Text(
-                    "Select Language",
-                    style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500, letterSpacing: 0.5),
-                  ),
-                ],
-              )
             ],
           ),
         ),
