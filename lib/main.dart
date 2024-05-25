@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             child: child);
         return child;
       },
-      title: 'Event Management',
+      title: 'Apna News ',
       navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
