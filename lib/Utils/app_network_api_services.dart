@@ -105,7 +105,8 @@ class NetworkAPIService extends BaseApiService {
         throw const InternalServerException('Internal server error', 500);
 
       case 429:
-        throw const UnknowException('To many Requests', 429);
+        throw const UnknowException(
+            "You have reached your today's limit.", 429);
 
       default:
         throw FetchDataException(

@@ -1,3 +1,5 @@
+import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +20,9 @@ class NoDataFoundScreen extends StatelessWidget {
             passedData,
             style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF5B358D),
+                color: CommonFunctions().themeIsDark()
+                    ? whiteColor
+                    : const Color(0xFF5B358D),
                 fontSize: 16),
           ),
         ),

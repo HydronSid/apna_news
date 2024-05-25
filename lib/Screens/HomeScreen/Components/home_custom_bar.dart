@@ -1,5 +1,6 @@
 import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,13 +12,15 @@ class HomeCustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HomeController controller = Get.find();
-    return SliverAppBar(
+
+    return Obx(() => SliverAppBar(
         toolbarHeight: 40,
         automaticallyImplyLeading: false,
         pinned: false,
         floating: false,
         iconTheme: const IconThemeData(color: blackColor),
-        backgroundColor: whiteColor,
+        backgroundColor:
+            CommonFunctions().themeIsDark() ? blackColor : whiteColor,
         flexibleSpace: Container(
           padding: const EdgeInsets.only(
             top: 4,
@@ -43,15 +46,17 @@ class HomeCustomAppBar extends StatelessWidget {
                                     .getNewsHeadLineList("general")
                                     .then((value))));
                       },
-                      child: const Icon(
+                      child: Icon(
                         Icons.settings,
-                        color: txtColor,
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : txtColor,
                         size: 28,
                       )),
                 ],
               ),
             ],
           ),
-        ));
+        )));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:apna_news/Controllers/view_news_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
 import 'package:apna_news/Widgets/common_button_loader.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _FilterScreenState extends State<FilterScreen> {
     controller.initFilter();
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: commonAppBar(title: "Filter"),
+      appBar: const CommonAppBar(title: "Filter"),
       body: Column(
         children: [
           Expanded(
@@ -66,12 +67,21 @@ class _FilterScreenState extends State<FilterScreen> {
                                                       .value ==
                                                   index
                                               ? Colors.green
-                                              : blackColor),
+                                              : CommonFunctions().themeIsDark()
+                                                  ? whiteColor
+                                                  : blackColor),
                                     ),
                                   ),
-                                  const Icon(
+                                  Icon(
                                     Icons.chevron_right_rounded,
                                     size: 14,
+                                    color: controller
+                                                .selectedAttributeIndex.value ==
+                                            index
+                                        ? Colors.green
+                                        : CommonFunctions().themeIsDark()
+                                            ? whiteColor
+                                            : blackColor,
                                   )
                                 ],
                               ),

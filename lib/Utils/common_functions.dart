@@ -1,3 +1,4 @@
+import 'package:apna_news/Controllers/theme_controller.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/main.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ import 'appcolors.dart';
 class CommonFunctions {
   static var globalContext = NavigationService.navigatorKey.currentContext!;
   String selectedVisitDate = "", selectedVisitTime = "";
-
+  ThemeController themeController = Get.find();
   static void fieldFocusChange(
       BuildContext context, FocusNode current, FocusNode nextFocus) {
     current.unfocus();
@@ -121,6 +122,10 @@ class CommonFunctions {
   //     CommonFunctions.showErrorSnackbar("Something went wrong.");
   //   }
   // }
+
+  bool themeIsDark() {
+    return themeController.isDarkMode.value;
+  }
 
   double? calculateTotal(double? rate, int? quantity) {
     if (rate == null || quantity == null) {

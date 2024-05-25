@@ -94,7 +94,7 @@ class TopHeadLineComponent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "Read Full Artical",
+                          "Read Full Article",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(

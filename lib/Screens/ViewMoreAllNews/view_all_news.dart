@@ -23,7 +23,7 @@ class _ViewAllNewsState extends State<ViewAllNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(title: "News"),
+      appBar: const CommonAppBar(title: "News"),
       body: RefreshIndicator(
         onRefresh: () async => controller.initRefreshData(),
         child: CustomScrollView(
@@ -33,7 +33,8 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                 delegate: SliverChildListDelegate([
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                color: whiteColor,
+                color:
+                    CommonFunctions().themeIsDark() ? blackColor : whiteColor,
                 child: Row(
                   children: [
                     Expanded(
@@ -43,9 +44,11 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.filter_alt_outlined,
-                            color: txtColor,
+                            color: CommonFunctions().themeIsDark()
+                                ? whiteColor
+                                : txtColor,
                           ),
                           const SizedBox(
                             width: 10,
@@ -54,7 +57,9 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                             "Filter",
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w500,
-                              color: txtColor,
+                              color: CommonFunctions().themeIsDark()
+                                  ? whiteColor
+                                  : txtColor,
                             ),
                           ),
                         ],
@@ -66,7 +71,9 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                         Get.bottomSheet(
                             Container(
                               decoration: BoxDecoration(
-                                  color: whiteColor,
+                                  color: CommonFunctions().themeIsDark()
+                                      ? blackColor
+                                      : whiteColor,
                                   borderRadius: BorderRadius.circular(12)),
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -80,7 +87,9 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
-                                      color: txtColor,
+                                      color: CommonFunctions().themeIsDark()
+                                          ? whiteColor
+                                          : txtColor,
                                     ),
                                   ),
                                   const SizedBox(
@@ -107,7 +116,10 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                                                       : "Published At",
                                               style: GoogleFonts.poppins(
                                                   fontSize: 13,
-                                                  color: blackColor,
+                                                  color: CommonFunctions()
+                                                          .themeIsDark()
+                                                      ? whiteColor
+                                                      : blackColor,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                             value: option,
@@ -147,9 +159,11 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.sort,
-                            color: txtColor,
+                            color: CommonFunctions().themeIsDark()
+                                ? whiteColor
+                                : txtColor,
                           ),
                           const SizedBox(
                             width: 10,
@@ -158,7 +172,9 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                             "Sort",
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w500,
-                              color: txtColor,
+                              color: CommonFunctions().themeIsDark()
+                                  ? whiteColor
+                                  : txtColor,
                             ),
                           ),
                         ],
@@ -189,7 +205,7 @@ class _ViewAllNewsState extends State<ViewAllNews> {
                       )
                     : controller.articalList.isEmpty
                         ? const NoDataFoundScreen(
-                            passedData: "No Artical Found.")
+                            passedData: "No Article Found.")
                         : PaginatedListView(
                             scrollController: controller.scrollController,
                             enabledPagination: true,

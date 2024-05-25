@@ -39,7 +39,9 @@ class VerticalListCategory extends StatelessWidget {
                         title,
                         style: GoogleFonts.poppins(
                             letterSpacing: 0.7,
-                            color: txtColor,
+                            color: CommonFunctions().themeIsDark()
+                                ? whiteColor
+                                : txtColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14),
                       ),
@@ -103,13 +105,20 @@ class VerticalListCategory extends StatelessWidget {
               child: TextButton.icon(
                 style: TextButton.styleFrom(
                     shape: const StadiumBorder(),
-                    side: const BorderSide(color: accentColor)),
+                    side: BorderSide(
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : accentColor)),
                 onPressed: () => Get.toNamed(RouteNames.viewAllNews),
-                icon: const Icon(Icons.add_circle_outline_sharp,
-                    color: accentColor),
+                icon: Icon(Icons.add_circle_outline_sharp,
+                    color: CommonFunctions().themeIsDark()
+                        ? whiteColor
+                        : accentColor),
                 label: Text('View More News',
                     style: GoogleFonts.poppins(
-                        color: accentColor,
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : accentColor,
                         fontSize: 12,
                         fontWeight: FontWeight.bold)),
               ),

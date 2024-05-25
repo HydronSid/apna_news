@@ -2,6 +2,7 @@ import 'package:apna_news/Controllers/view_top_headlines_controller.dart';
 import 'package:apna_news/Screens/ViewAllTopHeadLines/Components/article_component.dart';
 import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
+import 'package:apna_news/Widgets/no_data_found.dart';
 import 'package:apna_news/Widgets/paginated_list_view.dart';
 import 'package:apna_news/Widgets/shimmer_helper.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: commonAppBar(title: "Top HeadLines"),
+      appBar: const CommonAppBar(title: "Top HeadLines"),
       body: RefreshIndicator(
         onRefresh: () async => controller.initRefreshData(),
         child: CustomScrollView(
@@ -58,33 +59,39 @@ class _ViewAllHeadLinesState extends State<ViewAllHeadLines> {
                           return shimmerCard();
                         },
                       )
-                    : PaginatedListView(
-                        scrollController: controller.scrollController,
-                        enabledPagination: true,
-                        offset: controller.paginatedModel.value!.offset,
-                        onPaginate: (int? offset) async {
-                          await controller.getArticleList(offset!, "viewmore",
-                              controller.selectedCat.toString());
-                        },
-                        reverse: false,
-                        totalSize: controller.paginatedModel.value!.totalSize,
-                        itemView: ListView.separated(
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 20,
-                            );
-                          },
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 5),
-                          itemCount: controller.articalList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            var article = controller.articalList[index];
-                            return ArticleComponent(article: article);
-                          },
-                        ),
-                      ),
+                    : controller.articalList.isEmpty
+                        ? const NoDataFoundScreen(
+                            passedData: "No Article Found.")
+                        : PaginatedListView(
+                            scrollController: controller.scrollController,
+                            enabledPagination: true,
+                            offset: controller.paginatedModel.value!.offset,
+                            onPaginate: (int? offset) async {
+                              await controller.getArticleList(
+                                  offset!,
+                                  "viewmore",
+                                  controller.selectedCat.toString());
+                            },
+                            reverse: false,
+                            totalSize:
+                                controller.paginatedModel.value!.totalSize,
+                            itemView: ListView.separated(
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(
+                                  height: 20,
+                                );
+                              },
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 5),
+                              itemCount: controller.articalList.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                var article = controller.articalList[index];
+                                return ArticleComponent(article: article);
+                              },
+                            ),
+                          ),
               )
             ]))
           ],

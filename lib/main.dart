@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
+import 'Controllers/theme_controller.dart';
 import 'Screens/splash_screen.dart';
 
 void main() {
@@ -27,22 +28,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      builder: (context, child) {
-        child = EasyLoading.init()(context, child);
-        child = MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
-            child: child);
-        return child;
-      },
-      title: 'Apna News ',
-      navigatorKey: NavigationService.navigatorKey,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      getPages: AppRoute.appRoutes(),
-      home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
-    );
+    final ThemeController themeController = Get.put(ThemeController());
+
+    return Obx(() => GetMaterialApp(
+          builder: (context, child) {
+            child = EasyLoading.init()(context, child);
+            child = MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+                child: child);
+            return child;
+          },
+          title: 'Apna News ',
+          navigatorKey: NavigationService.navigatorKey,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: themeController.isDarkMode.value
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          getPages: AppRoute.appRoutes(),
+          home: const SplashScreen(),
+          debugShowCheckedModeBanner: false,
+        ));
   }
 }

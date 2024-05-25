@@ -1,5 +1,6 @@
 import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,31 +16,24 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final controller = Get.put(HomeController());
 
-  // @override
-  // void initState() {
-  //   Future.delayed(const Duration(seconds: 3), () async {
-  //     Get.toNamed(RouteNames.homeScreen);
-  //   });
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: whiteColor,
-      body: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(Images.appLogo),
-              Lottie.asset(Images.appLoader, height: 90),
-            ],
+    return Obx(() => Scaffold(
+          backgroundColor:
+              CommonFunctions().themeIsDark() ? blackColor : whiteColor,
+          body: SafeArea(
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(Images.appLogo),
+                  Lottie.asset(Images.appLoader, height: 90),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

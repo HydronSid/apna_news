@@ -1,6 +1,8 @@
 import 'package:apna_news/Controllers/settings_controller.dart';
+import 'package:apna_news/Controllers/theme_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/appconstants.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Widgets/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final controller = Get.put(SettingsController());
+  ThemeController themeController = Get.find();
 
   @override
   void dispose() {
@@ -25,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(title: "Settings"),
+      appBar: const CommonAppBar(title: "Settings"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -47,7 +50,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: controller.selectedLanguage.value ==
                                     language.launguage
                                 ? whiteColor
-                                : blackColor),
+                                : CommonFunctions().themeIsDark()
+                                    ? whiteColor
+                                    : blackColor),
                       ),
                       selectedColor: primaryColor,
                       selected: controller.selectedLanguage.value ==
@@ -59,6 +64,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     );
                   }).toList(),
+                );
+              }),
+              Obx(() {
+                return SwitchListTile(
+                  title: const Text('Dark Mode'),
+                  value: themeController.isDarkMode.value,
+                  onChanged: (value) {
+                    themeController.toggleTheme();
+                  },
                 );
               }),
             ],

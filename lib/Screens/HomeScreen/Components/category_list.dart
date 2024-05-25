@@ -1,6 +1,7 @@
 import 'package:apna_news/Controllers/home_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/appconstants.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -34,9 +35,11 @@ class HorizontalCategory extends StatelessWidget {
                     () => Card(
                       elevation: 3,
                       margin: const EdgeInsets.only(bottom: 5),
-                      color: (controller.selectedIndex.value == index)
+                      color: controller.selectedIndex.value == index
                           ? primaryColor
-                          : Colors.white,
+                          : CommonFunctions().themeIsDark()
+                              ? blackColor
+                              : Colors.white,
                       shape: RoundedRectangleBorder(
                           side: BorderSide(
                               width: (controller.selectedIndex.value == index)
@@ -44,7 +47,9 @@ class HorizontalCategory extends StatelessWidget {
                                   : 0.7,
                               color: (controller.selectedIndex.value == index)
                                   ? primaryColor
-                                  : borderColor),
+                                  : CommonFunctions().themeIsDark()
+                                      ? whiteColor
+                                      : borderColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -57,7 +62,9 @@ class HorizontalCategory extends StatelessWidget {
                               height: 20,
                               color: (controller.selectedIndex.value == index)
                                   ? whiteColor
-                                  : txtColor,
+                                  : CommonFunctions().themeIsDark()
+                                      ? whiteColor
+                                      : txtColor,
                             ),
                             const SizedBox(
                               width: 10,
@@ -67,9 +74,11 @@ class HorizontalCategory extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.nunito(
                                 fontWeight: FontWeight.bold,
-                                color: (controller.selectedIndex.value == index)
+                                color: controller.selectedIndex.value == index
                                     ? whiteColor
-                                    : txtColor,
+                                    : CommonFunctions().themeIsDark()
+                                        ? whiteColor
+                                        : txtColor,
                               ),
                             ),
                           ],

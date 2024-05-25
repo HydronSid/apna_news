@@ -40,7 +40,9 @@ class HorizontalListCategory extends StatelessWidget {
                         title,
                         style: GoogleFonts.poppins(
                             letterSpacing: 0.7,
-                            color: txtColor,
+                            color: CommonFunctions().themeIsDark()
+                                ? whiteColor
+                                : txtColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14),
                       ),
@@ -54,7 +56,9 @@ class HorizontalListCategory extends StatelessWidget {
                           style: GoogleFonts.poppins(
                             letterSpacing: 0.7,
                             decoration: TextDecoration.underline,
-                            color: txtColor,
+                            color: CommonFunctions().themeIsDark()
+                                ? whiteColor
+                                : txtColor,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

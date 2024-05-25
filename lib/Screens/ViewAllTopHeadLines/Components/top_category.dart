@@ -1,6 +1,7 @@
 import 'package:apna_news/Controllers/view_top_headlines_controller.dart';
 import 'package:apna_news/Utils/appcolors.dart';
 import 'package:apna_news/Utils/appconstants.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,9 @@ class HeadLineHorizontalCategory extends StatelessWidget {
                       margin: const EdgeInsets.only(bottom: 5),
                       color: (controller.selectedIndex.value == index)
                           ? primaryColor
-                          : Colors.white,
+                          : CommonFunctions().themeIsDark()
+                              ? blackColor
+                              : Colors.white,
                       shape: RoundedRectangleBorder(
                           side: BorderSide(
                               width: (controller.selectedIndex.value == index)
@@ -39,7 +42,9 @@ class HeadLineHorizontalCategory extends StatelessWidget {
                                   : 0.7,
                               color: (controller.selectedIndex.value == index)
                                   ? primaryColor
-                                  : borderColor),
+                                  : CommonFunctions().themeIsDark()
+                                      ? whiteColor
+                                      : borderColor),
                           borderRadius: BorderRadius.circular(10)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -52,7 +57,9 @@ class HeadLineHorizontalCategory extends StatelessWidget {
                               height: 20,
                               color: (controller.selectedIndex.value == index)
                                   ? whiteColor
-                                  : txtColor,
+                                  : CommonFunctions().themeIsDark()
+                                      ? whiteColor
+                                      : txtColor,
                             ),
                             const SizedBox(
                               width: 10,
@@ -64,7 +71,9 @@ class HeadLineHorizontalCategory extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: (controller.selectedIndex.value == index)
                                     ? whiteColor
-                                    : txtColor,
+                                    : CommonFunctions().themeIsDark()
+                                        ? whiteColor
+                                        : txtColor,
                               ),
                             ),
                           ],
