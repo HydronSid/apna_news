@@ -1,5 +1,6 @@
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/custom_image.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,9 @@ class ArticleComponent extends StatelessWidget {
                     maxLines: 3,
                     style: GoogleFonts.poppins(
                         fontSize: 13,
-                        color: txtColor,
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : txtColor,
                         fontWeight: FontWeight.w700),
                   ),
                   const Spacer(),

@@ -1,5 +1,6 @@
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Utils/route_names.dart';
 import 'package:apna_news/Widgets/custom_image.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,8 @@ class TopHeadLineComponent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: whiteColor,
+                color:
+                    CommonFunctions().themeIsDark() ? blackColor : whiteColor,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +77,10 @@ class TopHeadLineComponent extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500, color: blackColor),
+                        fontWeight: FontWeight.w500,
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : blackColor),
                   ),
                   const Spacer(),
                   Text(
@@ -83,7 +88,10 @@ class TopHeadLineComponent extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w500, color: blackColor),
+                        fontWeight: FontWeight.w500,
+                        color: CommonFunctions().themeIsDark()
+                            ? whiteColor
+                            : blackColor),
                   ),
                   const Spacer(),
                   InkWell(
@@ -98,11 +106,16 @@ class TopHeadLineComponent extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.normal, color: blackColor),
+                              fontWeight: FontWeight.normal,
+                              color: CommonFunctions().themeIsDark()
+                                  ? whiteColor
+                                  : blackColor),
                         ),
-                        const Icon(
+                        Icon(
                           Icons.arrow_right_alt_rounded,
-                          color: blackColor,
+                          color: CommonFunctions().themeIsDark()
+                              ? whiteColor
+                              : blackColor,
                         )
                       ],
                     ),

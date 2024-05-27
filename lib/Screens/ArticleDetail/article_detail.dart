@@ -1,5 +1,6 @@
 import 'package:apna_news/Models/top_headline_model.dart';
 import 'package:apna_news/Utils/appcolors.dart';
+import 'package:apna_news/Utils/common_functions.dart';
 import 'package:apna_news/Widgets/custom_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +48,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       Text('${articleModel.title}',
                           style: GoogleFonts.poppins(
                               fontSize: 16,
-                              color: txtColor,
+                              color: CommonFunctions().themeIsDark()
+                                  ? whiteColor
+                                  : txtColor,
                               fontWeight: FontWeight.w700)),
                       const SizedBox(
                         height: 10,
@@ -72,7 +75,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                                 fontSize: 12,
-                                color: Colors.black87,
+                                color: CommonFunctions().themeIsDark()
+                                    ? whiteColor
+                                    : Colors.black87,
                                 fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -83,7 +88,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       Text('${articleModel.description}',
                           style: GoogleFonts.poppins(
                               fontSize: 15,
-                              color: Colors.black87,
+                              color: CommonFunctions().themeIsDark()
+                                  ? whiteColor
+                                  : Colors.black87,
                               fontWeight: FontWeight.w500)),
                     ],
                   ),
@@ -101,6 +108,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
                       shape: BoxShape.circle, color: whiteColor),
                   child: const Icon(
                     Icons.chevron_left_rounded,
+                    color: blackColor,
                     size: 35,
                   ),
                 ),
